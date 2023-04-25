@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useQuery } from 'react';
 import {
   Container,
   Card,
@@ -16,7 +16,7 @@ const SavedBooks = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
-
+  
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -109,3 +109,10 @@ const SavedBooks = () => {
 };
 
 export default SavedBooks;
+
+
+//TODO: Remove the useEffect() Hook that sets the state for UserData.
+
+//TODO: Instead, use the useQuery() Hook to execute the GET_ME query on load and save it to a variable named userData.
+
+//TODO: Use the useMutation() Hook to execute the REMOVE_BOOK mutation in the handleDeleteBook() function instead of the deleteBook() function that's imported from API file. (Make sure you keep the removeBookId() function in place!)

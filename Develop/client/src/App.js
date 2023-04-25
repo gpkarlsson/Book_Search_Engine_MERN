@@ -20,3 +20,5 @@ function App() {
 }
 
 export default App;
+
+//TODO: Create an Apollo Provider to make every request work with the Apollo Server

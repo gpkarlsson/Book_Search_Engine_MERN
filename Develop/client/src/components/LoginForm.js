@@ -2,8 +2,12 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { loginUser } from '../utils/API';
+import { loginUser } from '../utils/API'; //remove?
+import { LOGIN_USER } from '../utils/mutations'
+
 import Auth from '../utils/auth';
+
+// TODO: Replace the loginUser() functionality imported from the API file with the LOGIN_USER mutation functionality.
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -25,6 +29,7 @@ const LoginForm = () => {
       event.stopPropagation();
     }
 
+    //TODO: replace loginUser with LOGIN_USER ?
     try {
       const response = await loginUser(userFormData);
 
