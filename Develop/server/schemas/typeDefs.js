@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 //TODO: Define the necessary Query and Mutation types:
-    // Query type:
-    // me: Which returns a User type
+// Query type:
+// me: Which returns a User type
 
 //     Mutation type:
 
@@ -44,8 +44,6 @@ const { gql } = require('apollo-server-express');
 //     token
 
 //     user (References the User type.)
-
-
 
 const typeDefs = gql`
     type User {
