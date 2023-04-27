@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Jumbotron,
   Container,
-  CardColumns,
-  Card,
+  Col,
+  Form,
   Button,
+  Card,
+  Row
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
+import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 import { useMutation } from '@apollo/client'
@@ -20,7 +21,7 @@ import { SAVE_BOOK } from '../utils/mutations'
 
 
 const SearchBooks = () => {
-  const [addBook, { error }] = useMutation(SAVE_BOOK);
+  const [addBook] = useMutation(SAVE_BOOK);
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -98,11 +99,11 @@ const SearchBooks = () => {
 
   return (
     <>
-      <Jumbotron className='text-light bg-dark pt-5'>
+      <div className='text-light bg-dark pt-5'>
         <Container>
           <h1>Search for Books!</h1>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
+            <Row>
               <Col xs={12} md={8}>
                 <Form.Control
                   name='searchInput'
@@ -118,27 +119,24 @@ const SearchBooks = () => {
                   Submit Search
                 </Button>
               </Col>
-            </Form.Row>
+            </Row>
           </Form>
         </Container>
-      </Jumbotron>
+      </div>
 
       <Container>
-        <h2>
+        <h2 className='pt-5'>
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
             : 'Search for a book to begin'}
         </h2>
-        <CardColumns>
+        <Row>
           {searchedBooks.map((book) => {
             return (
-              // <Col md="4">
+              <Col md="4">
                 <Card key={book.bookId} border='dark'>
                   {book.image ? (
-                    <Card.Img 
-                    src={book.image} 
-                    alt={`The cover for ${book.title}`} 
-                    variant='top' />
+                    <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
                   ) : null}
                   <Card.Body>
                     <Card.Title>{book.title}</Card.Title>
@@ -156,10 +154,10 @@ const SearchBooks = () => {
                     )}
                   </Card.Body>
                 </Card>
-              // </Col>
+              </Col>
             );
           })}
-        </CardColumns>
+        </Row>
       </Container>
     </>
   );
