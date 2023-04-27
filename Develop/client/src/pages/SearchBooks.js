@@ -15,9 +15,7 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client'
 import { SAVE_BOOK } from '../utils/mutations'
 
-//TODO: Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-
-//TODO: Make sure you keep the logic for saving the book's ID to state in the try...catch block!
+// Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
 
 
 const SearchBooks = () => {
