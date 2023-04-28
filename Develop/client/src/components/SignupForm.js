@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-// import { createUser } from '../utils/API';
+import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client'
@@ -22,7 +22,7 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-  const [addUser] = useMutation(ADD_USER)
+  const [addUser, { error }] = useMutation(ADD_USER)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -31,6 +31,7 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    // console.log(event, data)
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -38,20 +39,13 @@ const SignupForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
     try {
-      const { data } = await addUser({ variables: { ...userFormData } })
-      // const response = await createUser(userFormData);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-      // const { token, user } = await response.json();
-      // console.log(user);
+      const { data } = await addUser({
+        variables: { ...userFormData}
+      });
       Auth.login(data.addUser.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+    } catch (e) {
+      console.error(e);
     }
 
     setUserFormData({
@@ -60,6 +54,29 @@ const SignupForm = () => {
       password: '',
     });
   };
+
+    // try {
+    //   const { data } = await addUser({ variables: { ...userFormData } })
+    //   const response = await createUser(userFormData);
+    //   console.log(response)
+    //   console.log("line47")
+
+    //   if (!response.ok) {
+    //     throw new Error('something went wrong!');
+    //   }
+    //   // const { token, user } = await response.json();
+    //   Auth.login(data.addUser.token);
+    // } catch (err) {
+    //   console.error(err);
+    //   setShowAlert(true);
+    // }
+
+  //   setUserFormData({
+  //     username: '',
+  //     email: '',
+  //     password: '',
+  //   });
+  // };
 
   return (
     <>
